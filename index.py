@@ -1,16 +1,14 @@
-import os
-
 from telethon import TelegramClient, events
 
+import assist
 import config
+import db
+import handle_callbackquery_message
+import handle_chat_action_message
 import handle_group_message
 import handle_private_message
-import handle_chat_action_message
-import handle_callbackquery_message
-import assist
-import db
 import simple_math
-from helpp import send, reply
+from helpp import reply
 
 bot = TelegramClient('botCal', 28288600, 'b5b9051373853427d541dbd124e0202b').start(
     bot_token=config.bot_token)
@@ -46,7 +44,7 @@ async def new_message(event):
 
         if result_simple_math is not None:
             await reply(event, str(result_simple_math))
-        
+
         await handle_group_message.index(bot, event, text, chat_id, sender_id, user)
         # try:
         #     await handle_group_message.index(bot, event, text, chat_id, sender_id, user)

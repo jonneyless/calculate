@@ -1,6 +1,5 @@
 import telethon
 import telethon.tl.types
-from telethon import functions
 
 import assist
 import config

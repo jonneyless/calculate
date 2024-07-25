@@ -1,21 +1,7 @@
 import pymysql
 from dbutils.pooled_db import PooledDB
 
-import ini
-
-mysql_host = ini.config.get('mysql', 'host')
-mysql_db = ini.config.get('mysql', 'db')
-mysql_user = ini.config.get('mysql', 'user')
-mysql_password = ini.config.get('mysql', 'password')
-mysql_port = ini.config.get('mysql', 'port')
-
-mysqlInfo = {
-    "host": mysql_host,
-    "db": mysql_db,
-    "user": mysql_user,
-    "passwd": mysql_password,
-    "port": int(mysql_port)
-}
+from config import mysqlInfo
 
 
 class OPMysql(object):

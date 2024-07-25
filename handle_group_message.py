@@ -1,13 +1,13 @@
-from telethon.tl.types import ChannelParticipantsAdmins
-import telethon
-
 import re
+
+import telethon
+from telethon.tl.types import ChannelParticipantsAdmins
+
 import assist
 import config
 import db
 import db_redis
 import helpp
-import net
 import template
 
 
@@ -69,7 +69,7 @@ async def index(bot, event, text, chat_id, sender_id, user):
         # admin_flag = await helpp.is_admin(chat_id, sender_id, user)
         # if not admin_flag:
         #     return
-        
+
         # admin_no_flag = await helpp.is_admin_no(chat_id, sender_id, user)
         # if not admin_no_flag:
         #     return

@@ -1,16 +1,18 @@
-import requests
-import json
-import redis.asyncio as redis
 import asyncio
+import json
+
+import redis.asyncio as redis
+import requests
 
 import assist
 import config
-import ini
+from config import redisInfo
 
-redis_host = ini.config.get('redis', 'host')
-redis_port = ini.config.get('redis', 'port')
-redis_db = ini.config.get('redis', 'db')
-redis_password = ini.config.get('redis', 'password')
+redis_host = redisInfo['host']
+redis_port = redisInfo['port']
+redis_db = redisInfo['db']
+redis_password = redisInfo['password']
+
 redis_pool = redis.ConnectionPool(host=redis_host, port=int(redis_port), db=int(redis_db), password=redis_password)
 conn = redis.Redis(connection_pool=redis_pool)
 

@@ -1,11 +1,12 @@
-import redis.asyncio as redis
 import json
 
-import ini
+import redis.asyncio as redis
 
-redis_host = ini.config.get('redis', 'host')
-redis_port = ini.config.get('redis', 'port')
-redis_db = ini.config.get('redis', 'db')
+from config import redisInfo
+
+redis_host = redisInfo['host']
+redis_port = redisInfo['port']
+redis_db = redisInfo['db']
 redis_password = ""
 prefix = "cal"
 

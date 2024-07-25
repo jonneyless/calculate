@@ -1,7 +1,6 @@
+import db_redis
 from assist import get_current_time, get_created_at
 from dbpool import OPMysql
-import db_redis
-from config import flag_up, flag_down
 
 
 # ======================================================================================================================
@@ -748,4 +747,3 @@ async def admin_no_delete_by_username(chat_id, username):
     opm.dispose()
 
     return result
-    

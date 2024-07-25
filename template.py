@@ -65,8 +65,8 @@ def template_admins_no(admins, officals, flag=1):
         text += " "
 
     return text
-    
-    
+
+
 def template_time_money_rate(num):
     return "汇率设置成功！当前实时汇率：%s" % num
 

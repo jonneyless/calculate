@@ -1,5 +1,6 @@
-import db_redis
 import asyncio
+
+import db_redis
 
 loop = asyncio.get_event_loop()
 

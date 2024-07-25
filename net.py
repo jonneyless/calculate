@@ -1,10 +1,11 @@
+import json
+
+import requests
 from telethon.tl.types import ChannelParticipantsAdmins
 
-import json
-import requests
-import db_redis
 import assist
 import config
+import db_redis
 
 
 async def get_admins(bot, group_tg_id):

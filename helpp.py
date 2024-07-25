@@ -68,8 +68,8 @@ async def init_chat(bot, event, chat_id):
 def need_replyer(text):
     flag = False
     if (text == "设置不允许操作人") or (text == "删除不允许操作人") or (text.find("+") == 0) or (text.find("入款+") == 0) or (
-            text.find("-") == 0) or (text.find("入款-") == 0) or (text.find("下发-") == 0) or (
-            text.find("下发") == 0) or text == "账单":
+        text.find("-") == 0) or (text.find("入款-") == 0) or (text.find("下发-") == 0) or (
+        text.find("下发") == 0) or text == "账单":
         flag = True
 
     return flag
@@ -92,7 +92,7 @@ async def is_admin(chat_id, sender_id, user):
 
 async def is_admin_no(chat_id, sender_id, user):
     flag = False
-    
+
     admin = await db.admin_no_one(chat_id, sender_id)
     if admin is None:
         if len(user["username"]) == 0:
@@ -103,8 +103,8 @@ async def is_admin_no(chat_id, sender_id, user):
                 flag = True
 
     return flag
-    
-    
+
+
 async def get_group(chat_id, event):
     group = await db.group_one(chat_id)
     if group is None:
@@ -115,7 +115,7 @@ async def get_group(chat_id, event):
             if hasattr(chat, "title") and chat.title is not None:
                 if chat.title != group["title"]:
                     await db.group_set_title(group, chat.title)
-                    
+
     group = assist.handle_group_sql(group)
 
     return group
@@ -221,8 +221,8 @@ async def show_admin_no(event, chat_id, flag=1):
     msg = template.template_admins_no(admins, officals, flag)
 
     await reply(event, msg)
-    
-    
+
+
 async def save_log(event, group, num, user, flag, replyer=None):
     money_rate = group["money_rate"]
     profit_rate = group["profit_rate"]
