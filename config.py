@@ -15,7 +15,7 @@ redisInfo = {
     "host": env.str("REDIS_HOST", "127.0.0.1"),
     "port": env.int("REDIS_PORT", 6379),
     "db": env.int("REDIS_DB", 0),
-    "password": env.int("REDIS_PASS", 1123),
+    "password": env.str("REDIS_PASS", 1123),
 }
 
 bot_token = env.str('BOT_TOKEN', '5995027011:AAFbO4lMOnv-AYbDYT2NTtLFJ79FkcON5jE')
@@ -30,7 +30,7 @@ bot_start_url = "https://t.me/" + bot_username + "?start=%s"
 share_url = "https://t.me/" + bot_username + "?startgroup=true"
 web_url = web_sub_domain + "/chat/day?chat_id=%s"
 
-okex_url = "https://www.okex.com/v3/c2c/tradingOrders/books"
+okex_url = "https://www.okx.com/v3/c2c/tradingOrders/books"
 
 flag_up = 1
 flag_down = 2

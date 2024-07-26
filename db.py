@@ -282,6 +282,18 @@ async def group_set_pay_type(group, pay_type):
     return result
 
 
+async def group_little_price_change(group, operation: str, number: int):
+    opm = OPMysql()
+
+    update_sql = "update chats set little_price_change = little_price_change " + operation + str(number) + " where id = %s"
+
+    result = opm.op_safe_update(update_sql, (group["id"],))
+
+    opm.dispose()
+
+    return result
+
+
 async def group_add_little_price_change(group):
     opm = OPMysql()
 

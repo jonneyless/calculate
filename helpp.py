@@ -163,12 +163,12 @@ async def change_time_rate(bot, event, group, edit=False, chat_id=None, msg_id=N
     prices = await net.get_okex_price(pay_method)
 
     message = await template.template_change_time_rate(group, prices, pay_method)
-    buttons = template.buttons_change_time_rate(seller_position, pay_method)
+    # buttons = template.buttons_change_time_rate(seller_position, pay_method)
 
     if edit:
-        await editMsg(bot, chat_id, msg_id, message, buttons)
+        await editMsg(bot, chat_id, msg_id, message)
     else:
-        await send(event, message, buttons)
+        await send(event, message)
 
 
 async def show_log(event, group):

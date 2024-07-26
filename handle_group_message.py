@@ -1,3 +1,4 @@
+import decimal
 import re
 
 import telethon
@@ -321,6 +322,51 @@ async def index(bot, event, text, chat_id, sender_id, user):
         await helpp.change_time_rate(bot, event, group, False, False, False, group["seller_position"],
                                      group["pay_type"])
         return
+    elif text.startswith("加") or text.startswith("减") or text.startswith("实时汇率加") or text.startswith("实时汇率减"):
+        group = await helpp.get_group(chat_id, event)
+        if group is None:
+            return
+
+        admin_flag = await helpp.is_admin(chat_id, sender_id, user)
+        if not admin_flag:
+            return
+
+        admin_no_flag = await helpp.is_admin_no(chat_id, sender_id, user)
+        if not admin_no_flag:
+            return
+
+        text = text.replace("实时汇率", "")
+
+        if text.startswith("加"):
+            coefficient = 1
+            operation = '+'
+            num = text.replace("加", "")
+        else:
+            coefficient = -1
+            operation = '-'
+            num = text.replace("减", "")
+
+        num = num.strip()
+
+        if assist.is_number(num):
+            if len(num) > 4:
+                await helpp.send(event, "格式错误，实时汇率变更最小只支持小数点后两位。")
+                return
+
+            number = template.to_num2(num)
+
+            group['little_price_change'] += decimal.Decimal(number * coefficient)
+
+            current_price = await helpp.get_current_price(group)
+            if current_price < 0:
+                await helpp.send(event, "实时汇率不能为负数。")
+                return
+
+            await db.group_little_price_change(group, operation, number)
+            await db.group_set_time_rate(group)
+
+            await helpp.send(event, template.template_time_money_rate(current_price))
+            return
     elif text.find("设置汇率") == 0:
         group = await helpp.get_group(chat_id, event)
         if group is None:
@@ -392,7 +438,7 @@ async def index(bot, event, text, chat_id, sender_id, user):
 
             return
     elif text.find("+") == 0 and text.find("/") > 0:
-        pattern1 = "^\+(.*?)\/(.*?)$"  # +1000/10
+        pattern1 = "^+(.*?)/(.*?)$"  # +1000/10
         result1 = re.match(pattern1, text)
 
         if result1 is not None:
